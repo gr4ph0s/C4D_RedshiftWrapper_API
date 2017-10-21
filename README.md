@@ -33,7 +33,7 @@ More detailled documentation [Here](https://gr4ph0s.github.io/C4D_RedshiftWrappe
 
 ## Examples
 Basic exemple to get the redshift material, add a fresnel shader and constant node, and link all nodes. (Constant => Fresnel => Material => Output)
-```
+```python
 import c4d
 from RedshiftWrapper.Redshift import Redshift
  
