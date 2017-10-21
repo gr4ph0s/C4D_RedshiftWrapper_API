@@ -4,14 +4,11 @@ from MetaName import MetaName
 
 
 class Node(MetaName):
-    """
-    Represent a Node that already exist in a Material.
-    :member: _GvNode: c4d.modules.graphview.GvNode => The GvNode linked to this Node. READ-ONLY => DO NOT EDIT !!! 
-    :member: _NodeType:
-        Int => a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html 
-        Str => a Redshift Node look at ::class:: MetaclassName
-    :member: __DoUndo: DEFINE BY ::class:: REDSHIFT
-        Bool => True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False
+    """Represent a Node that already exist in a Material.
+
+    :member _GvNode: (c4d.modules.graphview.GvNode) - The GvNode linked to this Node. READ-ONLY DO NOT EDIT !!! 
+    :member _NodeType: (Int or Str) - Int (a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html) or a Redshift Node member loot at :class:`MetaclassName`.
+    :member __DoUndo: (Bool) DEFINE BY :class:`.Redshift`,  True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False
     """
 
     _GvNode = None
@@ -19,10 +16,12 @@ class Node(MetaName):
     __DoUndo = True
 
     def __init__(self, gvNode, undo=True):
-        """
-        Initialization of the node
-        :param gvNode: 
-            c4d.modules.graphview.GvNode => The GvNode linked to this Node.
+        """Initialization of the node
+
+        :param gvNode: The GvNode linked to this Node.
+        :type gvNode: c4d.modules.graphview.GvNode
+        :param undo: If undo need to be done.
+        :type undo: Bool
         """
         if not isinstance(gvNode, c4d.modules.graphview.GvNode):
             raise TypeError('gvNode is not a c4d.modules.graphview.GvNode')
@@ -41,8 +40,8 @@ class Node(MetaName):
         return self.GetName()
 
     def _SetNodeType(self):
-        """
-        Set self._NodeType according the GvNode
+        """Set self._NodeType according the GvNode
+
             Int => a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html 
             Str => a Redshift Node look at ::class:: MetaclassName 
         """
@@ -57,33 +56,34 @@ class Node(MetaName):
             self._NodeType = self._GvNode.GetOperatorID()
 
     def GetNode(self):
-        """
-        Get the GvNode linked
-        :return: c4d.modules.graphview.GvNode => The GvNode linked to this Node.
+        """Get the GvNode linked.
+
+        :return: The GvNode linked to this Node.
+        :rtype: c4d.modules.graphview.GvNode
         """
         return self._GvNode
 
     def GetType(self):
-        """
-        Get the GvNode Type
-        :return:    Int: A Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html 
-                    Str: A Redshift Node look at ::class:: MetaclassName 
+        """Get the GvNode Type.
+
+        :return: Int (a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html) or a Redshift Node member loot at :class:`MetaclassName`
+        :rtype: Int or Str
         """
         return self._NodeType
 
     def GetColor(self):
-        """
-        Get the color of a GvNode Type
-        :return:    c4d.Vector: color of the GvNode lined to this Node
+        """Get the color of a GvNode Type.
+
+        :return: Color of the GvNode linked to this Node.
+        :rtype: c4d.Vector
         """
         return self[c4d.ID_GVBASE_COLOR]
         
     def SetColor(self, color=None):
-        """
-        Set the color of the GvNode
-        :param color: 
-            c4d.Vector => New color of the node
-            None => Default color according the type of the node
+        """Set the color of the GvNode.
+
+        :param color: New color of the node, if None default color according the type of the node type
+        :type color: c4d.Vector or None
         """
         if not isinstance(color, c4d.Vector) and color is not None:
             raise TypeError('color is not a valid color')
@@ -96,32 +96,31 @@ class Node(MetaName):
         self[c4d.ID_GVBASE_COLOR] = color
         
     def SetName(self, newName):
-        """
-        Set the name of the GvNode
-        :param newName: 
-            str => New name of the GvNode
+        """Set the name of the GvNode.
+
+        :param newName: New name of the GvNode.
+        :type newName: str
         """
         if self.__DoUndo:
             self._GvNode.GetNodeMaster().AddUndo()
         self._GvNode.SetName(newName)
 
     def GetName(self):
-        """
-        Get the name of the GvNode
-        :return: 
-            str => Name of the GvNode
+        """Get the name of the GvNode.
+
+        :return: Name of the GvNode.
+        :rtype: str
         """
         return self._GvNode.GetName()
 
     def SearchPort(self, portToSearch, searchType=None):
-        """
-        Search a GvPort in the Node, parameter should be exposed.
-        :param portToSearch: 
-            str => The name of the parameter
-            int => The port ID of the Node
-        :param searchType: 
-            int => GV_PORT_INPUT or GV_PORT_OUTPUT or None For both (None is only working for str portToSearch)
-        :return: c4d.modules.graphview.GvPort => None or GvPort that match the search
+        """Search a GvPort in the Node, parameter should be exposed.
+
+        :param portToSearch: The name of the parameter or The port ID of the Node.
+        :type portToSearch: str or int
+        :param searchType: GV_PORT_INPUT or GV_PORT_OUTPUT if None for both (None is only working for str portToSearch).
+        :return: GvPort that match the search.
+        :rtype: c4d.modules.graphview.GvPort or None
         """
         if not isinstance(portToSearch, int) and not isinstance(portToSearch, str):
             raise TypeError('portToSearch is not parameter or not name of a parameter')
@@ -156,14 +155,14 @@ class Node(MetaName):
         return None
 
     def ExposeParameter(self, parameterID, portType):
-        """
-        Expose a parameter in a GvNode
-        :param parameterID: 
-            int => The ID of the parameter
-            c4d.DescID => The full DescID
-        :param portType: 
-            int => GV_PORT_INPUT or GV_PORT_OUTPUT
-        :return: Bool => True if success otherwise false
+        """Expose a parameter in a GvNode.
+
+        :param parameterID: The ID of the parameter or the full c4d.DescID.
+        :type paramaterID: int or c4d.DescID
+        :param portType: c4d.GV_PORT_INPUT or c4d.GV_PORT_OUTPUT.
+        :type portType: int
+        :return: True if success otherwise False.
+        :rtype: Bool
         """
         if not isinstance(parameterID, int) and not isinstance(parameterID, c4d.DescID):
             raise TypeError('parameterID is not valid')

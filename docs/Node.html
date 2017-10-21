@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RedshiftWrapper.Node module &#8212; C4D_RedshiftWrapper_API 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-RedshiftWrapper.Node">
+<span id="redshiftwrapper-node-module"></span><h1>RedshiftWrapper.Node module<a class="headerlink" href="#module-RedshiftWrapper.Node" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="RedshiftWrapper.Node.Node">
+<em class="property">class </em><code class="descclassname">RedshiftWrapper.Node.</code><code class="descname">Node</code><span class="sig-paren">(</span><em>gvNode</em>, <em>undo=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="MetaName.html#RedshiftWrapper.MetaName.MetaName" title="RedshiftWrapper.MetaName.MetaName"><code class="xref py py-class docutils literal"><span class="pre">RedshiftWrapper.MetaName.MetaName</span></code></a></p>
+<p>Represent a Node that already exist in a Material.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Member _GvNode:</th><td class="field-body">(c4d.modules.graphview.GvNode) - The GvNode linked to this Node. READ-ONLY DO NOT EDIT !!!</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Member _NodeType:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">(Int or Str) - Int (a Cinema 4D Node look at <a class="reference external" href="https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html">https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html</a>) or a Redshift Node member loot at <code class="xref py py-class docutils literal"><span class="pre">MetaclassName</span></code>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Member __DoUndo:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">(Bool) DEFINE BY <a class="reference internal" href="Redshift.html#RedshiftWrapper.Redshift.Redshift" title="RedshiftWrapper.Redshift.Redshift"><code class="xref py py-class docutils literal"><span class="pre">Redshift</span></code></a>,  True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.ExposeParameter">
+<code class="descname">ExposeParameter</code><span class="sig-paren">(</span><em>parameterID</em>, <em>portType</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.ExposeParameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.ExposeParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Expose a parameter in a GvNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parameterID</strong> – The ID of the parameter or the full c4d.DescID.</li>
+<li><strong>portType</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – c4d.GV_PORT_INPUT or c4d.GV_PORT_OUTPUT.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if success otherwise False.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.GetColor">
+<code class="descname">GetColor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.GetColor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.GetColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the color of a GvNode Type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Color of the GvNode linked to this Node.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">c4d.Vector</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.GetName">
+<code class="descname">GetName</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.GetName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.GetName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the GvNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Name of the GvNode.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)">str</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.GetNode">
+<code class="descname">GetNode</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.GetNode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.GetNode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the GvNode linked.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The GvNode linked to this Node.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">c4d.modules.graphview.GvNode</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.GetType">
+<code class="descname">GetType</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.GetType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.GetType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the GvNode Type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Int (a Cinema 4D Node look at <a class="reference external" href="https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html">https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html</a>) or a Redshift Node member loot at <code class="xref py py-class docutils literal"><span class="pre">MetaclassName</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Int or Str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.SearchPort">
+<code class="descname">SearchPort</code><span class="sig-paren">(</span><em>portToSearch</em>, <em>searchType=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.SearchPort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.SearchPort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search a GvPort in the Node, parameter should be exposed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>portToSearch</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The name of the parameter or The port ID of the Node.</li>
+<li><strong>searchType</strong> – GV_PORT_INPUT or GV_PORT_OUTPUT if None for both (None is only working for str portToSearch).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">GvPort that match the search.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">c4d.modules.graphview.GvPort or <a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)">None</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.SetColor">
+<code class="descname">SetColor</code><span class="sig-paren">(</span><em>color=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.SetColor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.SetColor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the color of the GvNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>color</strong> (<em>c4d.Vector</em><em> or </em><a class="reference external" href="https://docs.python.org/2/library/constants.html#None" title="(in Python v2.7)"><em>None</em></a>) – New color of the node, if None default color according the type of the node type</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Node.Node.SetName">
+<code class="descname">SetName</code><span class="sig-paren">(</span><em>newName</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Node.html#Node.SetName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Node.Node.SetName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the name of the GvNode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>newName</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – New name of the GvNode.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Adam Maxime <Graphos>.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Node.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

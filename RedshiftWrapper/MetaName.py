@@ -170,18 +170,18 @@ class MetaOut(object):
     Output = "Output"
     
 class MetaName(MetaMat, MetaTex, MetaUtils, MetaEnv, MetaLight, MetaVolume, MetaMath, MetaColor, MetaOut):
+    """Class for storing all possibles metaname.
     """
-    Class who store all possibles metaname.
-    """
+
     def _TestProperty(self, valueToTest, classToTest=None):
-        """
-        Test if any properties of ::class:: MetaName have a specific value
-            This fonction is used to test if a string is under MetaName
-        :param valueToTest: 
-            str => the string to test if it's inside MetaName
-        :param classToTest: 
-            class => Any class to test if valueToTest is within
-        :return: True if it's on MetaName overtwise False
+        """Test if any properties of :class:`MetaclassName` have a specific value, This fonction is used to test if a string is under MetaName.
+
+        :param valueToTest: value to test if it's inside MetaName.
+        :type valueToTest: str
+        :param classToTest: class to test if valueToTest is within.
+        :type classToTest: class
+        :return: True if it's on MetaName overtwise False.
+        :rtype: Bool
         """
         obj = None
         if classToTest is None:
@@ -195,11 +195,12 @@ class MetaName(MetaMat, MetaTex, MetaUtils, MetaEnv, MetaLight, MetaVolume, Meta
         return False
     
     def GetDefaultColorNode(self, nodeType):
-        """
-        Get the Default color for a node given it's type
-        :param nodeType: 
-            str => The MetaName type to test
-        :return: c4d.Vector => Default color
+        """Get the Default color for a node given it's type.
+
+        :param nodeType: The MetaName type to test.
+        :type nodeType: str
+        :return: Default color.
+        :rtype: c4d.Vector
         """
         classToTest = list()
         classToTest.append(MetaMat())

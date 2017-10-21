@@ -12,29 +12,28 @@ from MetaName import MetaName
 # ==============================================
 
 __author__ = 'Adam Maxime - Graphos <gr4ph0s(at)hotmail.fr>'
-__project__ = "https://github.com/gr4ph0s/RedshiftWrapper"
+__project__ = "https://github.com/gr4ph0s/C4D_RedshiftWrapper_API"
 __version__ = '1.0'
 
 
 class Redshift(MetaName):
-    """
-    The main wrapper arround Redshift API.
-    :member: doUndo: 
-        Bool => True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False
-    :member: _mat:
-        c4d.BaseMaterial => The redshift material we act on
-    :member: _gvMaster:
-        c4d.modules.graphview.GvNodeMaste => The Node master of self._mat
+    """The main wrapper arround Redshift API.
+
+        :member doUndo: (Bool) True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False.
+        :member _mat: (c4d.BaseMaterial) The redshift material we act on.
+        :member _gvMaster: (c4d.modules.graphview.GvNodeMaster) The Node master of self.mat.
+        :member _gvMaster: (c4d.modules.graphview.GvNodeMaster) The Node master of self.mat.
     """
     doUndo = True
     _mat = None
     _gvMaster = None
 
     def SetMat(self, mat):
-        """
-        Set the mat to act on
-        :param mat: 
-            c4d.BaseMaterial => Accept only a Redshift Material
+        """Set the mat to act on.
+
+        :param mat: The material to act on. Only accept a Redshift Material.
+        :type mat: c4d.BaseMaterial.
+        :raises: TypeError
         """
         global redshift
         if not isinstance(mat, c4d.BaseMaterial):
@@ -48,8 +47,7 @@ class Redshift(MetaName):
             raise TypeError('can\'t get GvMaster from mat')
 
     def _CheckMatIsValid(self):
-        """
-        Check if _self.mat is currently set and valid
+        """Check if :member:`._self.mat` is currently set and valid
         """
         global redshift
         if self._mat is None:
@@ -60,13 +58,13 @@ class Redshift(MetaName):
             raise TypeError('material is not a redshift material')
 
     def GetAllNodes(self, removeMasterGroup=True, gvNode=None, nodeList=None):
-        """
-        Get all nodes inside the material
-        Use redshift.GatAllNodes(), only removeMasterGroup is needed other parameters are for internal use
-        :param removeMasterGroup: 
-            Bool => True to remove the Shader Group that hold all other Node otherwise false
-        :return: 
-            List of ::class:: Node => All Nodes inside the material
+        """Get all nodes inside the material. 
+        Use redshift.GatAllNodes(), only removeMasterGroup is needed other parameters are for internal use.
+
+        :param removeMasterGroup: True to remove the Shader Group that hold all other Node otherwise false.
+        :type removeMasterGroup: Bool.
+        :return: All Nodes inside the material.
+        :rtype: List of :class:`.Node`
         """
         self._CheckMatIsValid()
 
@@ -84,20 +82,18 @@ class Redshift(MetaName):
         return nodeList
 
     def CreateShader(self, shaderType, x=-1, y=-1, NodeBefore=None):
-        """
-        Create a shader inside the material
-        :param shaderType: 
-            Int => a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html
-            Str => a Redshift Node look at ::class:: MetaclassName
-        :param x: 
-            int => X position in the Xpresso windows
-        :param y: 
-            int => Y position in the Xpresso windows
-        :param NodeBefore: 
-            Node => The node to insert before (Change execution order !!)
-            c4d.modules.graphview.GvNode => The node to insert before (Change execution order !!)
-        :return: 
-            List of ::class:: Node => All Nodes inside the material
+        """Create a shader inside the material.
+
+        :param shaderType: Int (a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html) or a Redshift Node member loot at :class:`MetaclassName`.
+        :type shaderType: Int or Str.
+        :param x: X position in the Xpresso windows.
+        :type x: int
+        :param y: Y position in the Xpresso windows.
+        :type y: int
+        :param NodeBefore: The node to insert before (Change execution order !!)
+        :type NodeBefore: :class:`.Node` or c4d.modules.graphview.GvNode
+        :return: All Nodes inside the material
+        :rtype: List of :class:`.Node`
         """
         self._CheckMatIsValid()
 
@@ -160,12 +156,12 @@ class Redshift(MetaName):
         return None
 
     def RemoveShader(self, node):
-        """
-        Remove a shader inside the material
-        :param node: 
-            Node => THe node object to remove
-        :return: 
-            Bool : True if delete overthiwe False
+        """Remove a shader inside the material.
+
+        :param node: Tee node object to remove.
+        :type node: :class:`.Node`
+        :return: True if delete overthiwe False.
+        :rtype: Bool 
         """
         self._CheckMatIsValid()
 
@@ -178,22 +174,18 @@ class Redshift(MetaName):
         return node.GetNode().Delete()
 
     def CreateConnection(self, SrcNode, DestNode, SrcParameter=None, DestParameter=None):
-        """
-        Connect two Nodes together
-        :param SrcNode: 
-            Node => The source Node (The one with an output)
-            c4d.modules.graphview.GvPort => The GvPort of the source Node returned by Node.ExposeParameter or Node.SearchPort
-        :param DestNode: 
-            Node => The destination Node (The one with an input)
-            c4d.modules.graphview.GvPort => The GvPort of the destination Node returned by Node.ExposeParameter or Node.SearchPort
-        :param SrcParameter: PARAMETER WILL BE IGNORED IF GvPORT IS USED IN SrcNode !!!
-            int => Id of the source GvPort (not the ID of the parameter)
-            str => Name of the source GvPort
-        :param DestParameter: PARAMETER WILL BE IGNORED IF GvPORT IS USED IN DestNode !!!
-            int => Id of the destination GvPort (not the ID of the parameter)
-            str => Name of the destination GvPort
-        :return: 
-            Bool : True if connection is created overthiwe False
+        """Connect two Nodes together.
+
+        :param SrcNode: The source Node (The one with an output) or GvPort of the source Node returned by Node.ExposeParameter or Node.SearchPort
+        :type SrcNode: :class:`.Node` or c4d.modules.graphview.GvPort
+        :param DestNode: The destination Node (The one with an input) or GvPort of the destination Node returned by Node.ExposeParameter or Node.SearchPort
+        :type DestNode: :class:`.Node` or c4d.modules.graphview.GvPort
+        :param SrcParameter: Id of the source GvPort (not the ID of the parameter) or the name of the source GvPort PARAMETER WILL BE IGNORED IF GvPORT IS USED IN SrcNode !!!
+        :type SrcParameter: int or str
+        :param DestParameter: Id of the destination GvPort (not the ID of the parameter) or the name of the destination GvPort PARAMETER WILL BE IGNORED IF GvPORT IS USED IN DestNode !!!
+        :type DestParameter: int or str
+        :return: True if connection is created overthiwe False
+        :rtype: Bool
         """
         self._CheckMatIsValid()
 
@@ -240,23 +232,12 @@ class Redshift(MetaName):
         return gvPortSrc.Connect(gvPortDest)
         
     def CreateMaterial(self, MatType=1000):
-        """
-        Create a new redshift material
-        :param MatType: 
-            int => The type of the Redshift shader ()
-                1000 => Material
-                1001 => Architectural
-                1002 => CarPaint
-                1003 => C4D Hair
-                1004 => Hair
-                1005 => Incandescent
-                1006 => Skin
-                1007 => Sprite
-                1008 => SSS
-                1009 => Particle
-                1010 => Volume
-        :return: 
-            c4d.Material : Created material or None if it's fail
+        """Create a new redshift material.
+
+        :param MatType: The type of the Redshift shader (from 1001, Material to 1010 Volume)
+        :type MatType: int
+        :return: Created material or None if it's fail
+        :rtype: c4d.Material or None.
         """
         if not isinstance(MatType, int):
             raise TypeError('MatType is not an integer')
@@ -269,22 +250,19 @@ class Redshift(MetaName):
         if not mat:
             return None
 
-        SetMat(mat)
         return mat
         
     def RemoveConnection(self, port, node=None, portType=None):
-        """
-        Disconnect all connection from a given port of Nodes
-        :param port: 
-            int => Id of the GvPort (not the ID of the parameter)
-            str => Name of the GvPort
-            c4d.modules.graphview.GvPort => The GvPort of the Node returned by Node.ExposeParameter or Node.SearchPort
-        :param node: PARAMETER WILL BE IGNORED IF GvPORT IS USED IN port !!!
-            Node => The Node that host the GvPort who want to remove connection
-        :param portType: PARAMETER WILL BE IGNORED IF GvPORT IS USED IN port !!!
-            int => GV_PORT_INPUT or GV_PORT_OUTPUT
-        :return: 
-            Bool : True if connection is created overthiwe False
+        """Disconnect all connection from a given port of Nodes.
+
+        :param port: Id of the GvPort (not the ID of the parameter), Name of the GvPort or The GvPort of the Node returned by Node.ExposeParameter or Node.SearchPort
+        :type port: int, str or c4d.modules.graphview.GvPort
+        :param node: The Node that host the GvPort who want to remove connection ..note:: PARAMETER WILL BE IGNORED IF GvPORT IS USED IN port !!!
+        :type node: :class:`.Node`
+        :param portType: GV_PORT_INPUT or GV_PORT_OUTPUT ..note:: PARAMETER WILL BE IGNORED IF GvPORT IS USED IN port !!!
+        :type portType: int
+        :return: True if connection is created overthiwe False
+        :rtype: Bool
         """
         self._CheckMatIsValid()
 

@@ -1,0 +1,264 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RedshiftWrapper.Node &#8212; C4D_RedshiftWrapper_API 1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for RedshiftWrapper.Node</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">c4d</span>
+<span class="kn">import</span> <span class="nn">redshift</span>
+<span class="kn">from</span> <span class="nn">MetaName</span> <span class="k">import</span> <span class="n">MetaName</span>
+
+
+<div class="viewcode-block" id="Node"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node">[docs]</a><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">MetaName</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represent a Node that already exist in a Material.</span>
+
+<span class="sd">    :member _GvNode: (c4d.modules.graphview.GvNode) - The GvNode linked to this Node. READ-ONLY DO NOT EDIT !!! </span>
+<span class="sd">    :member _NodeType: (Int or Str) - Int (a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html) or a Redshift Node member loot at :class:`MetaclassName`.</span>
+<span class="sd">    :member __DoUndo: (Bool) DEFINE BY :class:`.Redshift`,  True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_GvNode</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_NodeType</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># string if redshift int if xpresso</span>
+    <span class="n">__DoUndo</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gvNode</span><span class="p">,</span> <span class="n">undo</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization of the node</span>
+
+<span class="sd">        :param gvNode: The GvNode linked to this Node.</span>
+<span class="sd">        :type gvNode: c4d.modules.graphview.GvNode</span>
+<span class="sd">        :param undo: If undo need to be done.</span>
+<span class="sd">        :type undo: Bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gvNode</span><span class="p">,</span> <span class="n">c4d</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">graphview</span><span class="o">.</span><span class="n">GvNode</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;gvNode is not a c4d.modules.graphview.GvNode&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__DoUndo</span> <span class="o">=</span> <span class="n">undo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span> <span class="o">=</span> <span class="n">gvNode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_SetNodeType</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GvNode</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_SetNodeType</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set self._NodeType according the GvNode</span>
+
+<span class="sd">            Int =&gt; a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html </span>
+<span class="sd">            Str =&gt; a Redshift Node look at ::class:: MetaclassName </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">redshift</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">IsInstanceOf</span><span class="p">(</span><span class="n">redshift</span><span class="o">.</span><span class="n">GVrsshader</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_NodeType</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="p">[</span><span class="n">c4d</span><span class="o">.</span><span class="n">GV_REDSHIFT_SHADER_META_CLASSNAME</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetOperatorID</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1036746</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_NodeType</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Output</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetOperatorID</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1036762</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_NodeType</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">UtBaker</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_NodeType</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetOperatorID</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Node.GetNode"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.GetNode">[docs]</a>    <span class="k">def</span> <span class="nf">GetNode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the GvNode linked.</span>
+
+<span class="sd">        :return: The GvNode linked to this Node.</span>
+<span class="sd">        :rtype: c4d.modules.graphview.GvNode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span></div>
+
+<div class="viewcode-block" id="Node.GetType"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.GetType">[docs]</a>    <span class="k">def</span> <span class="nf">GetType</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the GvNode Type.</span>
+
+<span class="sd">        :return: Int (a Cinema 4D Node look at https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html) or a Redshift Node member loot at :class:`MetaclassName`</span>
+<span class="sd">        :rtype: Int or Str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NodeType</span></div>
+
+<div class="viewcode-block" id="Node.GetColor"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.GetColor">[docs]</a>    <span class="k">def</span> <span class="nf">GetColor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the color of a GvNode Type.</span>
+
+<span class="sd">        :return: Color of the GvNode linked to this Node.</span>
+<span class="sd">        :rtype: c4d.Vector</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">c4d</span><span class="o">.</span><span class="n">ID_GVBASE_COLOR</span><span class="p">]</span></div>
+        
+<div class="viewcode-block" id="Node.SetColor"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.SetColor">[docs]</a>    <span class="k">def</span> <span class="nf">SetColor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the color of the GvNode.</span>
+
+<span class="sd">        :param color: New color of the node, if None default color according the type of the node type</span>
+<span class="sd">        :type color: c4d.Vector or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">)</span> <span class="ow">and</span> <span class="n">color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;color is not a valid color&#39;</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetDefaultColorNode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">GetType</span><span class="p">())</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__DoUndo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetNodeMaster</span><span class="p">()</span><span class="o">.</span><span class="n">AddUndo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">[</span><span class="n">c4d</span><span class="o">.</span><span class="n">ID_GVBASE_COLOR</span><span class="p">]</span> <span class="o">=</span> <span class="n">color</span></div>
+        
+<div class="viewcode-block" id="Node.SetName"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.SetName">[docs]</a>    <span class="k">def</span> <span class="nf">SetName</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newName</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the name of the GvNode.</span>
+
+<span class="sd">        :param newName: New name of the GvNode.</span>
+<span class="sd">        :type newName: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__DoUndo</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetNodeMaster</span><span class="p">()</span><span class="o">.</span><span class="n">AddUndo</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">SetName</span><span class="p">(</span><span class="n">newName</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Node.GetName"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.GetName">[docs]</a>    <span class="k">def</span> <span class="nf">GetName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the name of the GvNode.</span>
+
+<span class="sd">        :return: Name of the GvNode.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetName</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Node.SearchPort"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.SearchPort">[docs]</a>    <span class="k">def</span> <span class="nf">SearchPort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">portToSearch</span><span class="p">,</span> <span class="n">searchType</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Search a GvPort in the Node, parameter should be exposed.</span>
+
+<span class="sd">        :param portToSearch: The name of the parameter or The port ID of the Node.</span>
+<span class="sd">        :type portToSearch: str or int</span>
+<span class="sd">        :param searchType: GV_PORT_INPUT or GV_PORT_OUTPUT if None for both (None is only working for str portToSearch).</span>
+<span class="sd">        :return: GvPort that match the search.</span>
+<span class="sd">        :rtype: c4d.modules.graphview.GvPort or None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">portToSearch</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">portToSearch</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;portToSearch is not parameter or not name of a parameter&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Search by Name</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">portToSearch</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="c1"># Set the list of gvPort to check</span>
+            <span class="n">gvPortList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">searchType</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">gvPortList</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetOutPorts</span><span class="p">()</span>
+                <span class="n">gvPortList</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetInPorts</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">searchType</span> <span class="o">==</span> <span class="n">c4d</span><span class="o">.</span><span class="n">GV_PORT_OUTPUT</span><span class="p">:</span>
+                <span class="n">gvPortList</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetOutPorts</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">searchType</span> <span class="o">==</span> <span class="n">c4d</span><span class="o">.</span><span class="n">GV_PORT_INPUT</span><span class="p">:</span>
+                <span class="n">gvPortList</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetInPorts</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;SearchType Unknow&#39;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">gvPort</span> <span class="ow">in</span> <span class="n">gvPortList</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">gvPort</span><span class="o">.</span><span class="n">GetName</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="p">)</span> <span class="o">==</span> <span class="n">portToSearch</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">gvPort</span>
+
+        <span class="c1"># Get port ID</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">portToSearch</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">searchType</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Cant search int without SearchType&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">searchType</span> <span class="o">==</span> <span class="n">c4d</span><span class="o">.</span><span class="n">GV_PORT_OUTPUT</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetOutPort</span><span class="p">(</span><span class="n">portToSearch</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">searchType</span> <span class="o">==</span> <span class="n">c4d</span><span class="o">.</span><span class="n">GV_PORT_INPUT</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetInPort</span><span class="p">(</span><span class="n">portToSearch</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Node.ExposeParameter"><a class="viewcode-back" href="../../Node.html#RedshiftWrapper.Node.Node.ExposeParameter">[docs]</a>    <span class="k">def</span> <span class="nf">ExposeParameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameterID</span><span class="p">,</span> <span class="n">portType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Expose a parameter in a GvNode.</span>
+
+<span class="sd">        :param parameterID: The ID of the parameter or the full c4d.DescID.</span>
+<span class="sd">        :type paramaterID: int or c4d.DescID</span>
+<span class="sd">        :param portType: c4d.GV_PORT_INPUT or c4d.GV_PORT_OUTPUT.</span>
+<span class="sd">        :type portType: int</span>
+<span class="sd">        :return: True if success otherwise False.</span>
+<span class="sd">        :rtype: Bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameterID</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameterID</span><span class="p">,</span> <span class="n">c4d</span><span class="o">.</span><span class="n">DescID</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;parameterID is not valid&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parameterID</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">AddPortIsOK</span><span class="p">(</span><span class="n">portType</span><span class="p">,</span> <span class="n">parameterID</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__DoUndo</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetNodeMaster</span><span class="p">()</span><span class="o">.</span><span class="n">AddUndo</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">AddPort</span><span class="p">(</span><span class="n">portType</span><span class="p">,</span> <span class="n">c4d</span><span class="o">.</span><span class="n">DescID</span><span class="p">(</span><span class="n">c4d</span><span class="o">.</span><span class="n">DescLevel</span><span class="p">(</span><span class="n">parameterID</span><span class="p">)),</span> <span class="n">message</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__DoUndo</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">GetNodeMaster</span><span class="p">()</span><span class="o">.</span><span class="n">AddUndo</span><span class="p">()</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GvNode</span><span class="o">.</span><span class="n">AddPort</span><span class="p">(</span><span class="n">portType</span><span class="p">,</span> <span class="n">parameterID</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">False</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Adam Maxime <Graphos>.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

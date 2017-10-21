@@ -1,0 +1,246 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RedshiftWrapper.Redshift module &#8212; C4D_RedshiftWrapper_API 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-RedshiftWrapper.Redshift">
+<span id="redshiftwrapper-redshift-module"></span><h1>RedshiftWrapper.Redshift module<a class="headerlink" href="#module-RedshiftWrapper.Redshift" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="RedshiftWrapper.Redshift.Redshift">
+<em class="property">class </em><code class="descclassname">RedshiftWrapper.</code><code class="descname">Redshift</code><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="MetaName.html#RedshiftWrapper.MetaName.MetaName" title="RedshiftWrapper.MetaName.MetaName"><code class="xref py py-class docutils literal"><span class="pre">RedshiftWrapper.MetaName</span></code></a></p>
+<p>The main wrapper arround Redshift API.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Member doUndo:</th><td class="field-body">(Bool) True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Member _mat:</th><td class="field-body">(c4d.BaseMaterial) The redshift material we act on.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Member _gvMaster:</th><td class="field-body">(c4d.modules.graphview.GvNodeMaster) The Node master of self.mat.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="RedshiftWrapper.Redshift.Redshift.CreateConnection">
+<code class="descname">CreateConnection</code><span class="sig-paren">(</span><em>SrcNode</em>, <em>DestNode</em>, <em>SrcParameter=None</em>, <em>DestParameter=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift.CreateConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift.CreateConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect two Nodes together.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>SrcNode</strong> (<a class="reference internal" href="Node.html#RedshiftWrapper.Node.Node" title="RedshiftWrapper.Node.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a> or c4d.modules.graphview.GvPort) – The source Node (The one with an output) or GvPort of the source Node returned by Node.ExposeParameter or Node.SearchPort</li>
+<li><strong>DestNode</strong> (<a class="reference internal" href="Node.html#RedshiftWrapper.Node.Node" title="RedshiftWrapper.Node.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a> or c4d.modules.graphview.GvPort) – The destination Node (The one with an input) or GvPort of the destination Node returned by Node.ExposeParameter or Node.SearchPort</li>
+<li><strong>SrcParameter</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Id of the source GvPort (not the ID of the parameter) or the name of the source GvPort PARAMETER WILL BE IGNORED IF GvPORT IS USED IN SrcNode !!!</li>
+<li><strong>DestParameter</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a>) – Id of the destination GvPort (not the ID of the parameter) or the name of the destination GvPort PARAMETER WILL BE IGNORED IF GvPORT IS USED IN DestNode !!!</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if connection is created overthiwe False</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Redshift.Redshift.CreateMaterial">
+<code class="descname">CreateMaterial</code><span class="sig-paren">(</span><em>MatType=1000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift.CreateMaterial"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift.CreateMaterial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new redshift material.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>MatType</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – The type of the Redshift shader (from 1001, Material to 1010 Volume)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Created material or None if it’s fail</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">c4d.Material or None.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Redshift.Redshift.CreateShader">
+<code class="descname">CreateShader</code><span class="sig-paren">(</span><em>shaderType</em>, <em>x=-1</em>, <em>y=-1</em>, <em>NodeBefore=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift.CreateShader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift.CreateShader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a shader inside the material.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>shaderType</strong> (<em>Int</em><em> or </em><em>Str.</em>) – Int (a Cinema 4D Node look at <a class="reference external" href="https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html">https://developers.maxon.net/docs/Cinema4DPythonSDK/html/types/gvnodes.html</a>) or a Redshift Node member loot at <code class="xref py py-class docutils literal"><span class="pre">MetaclassName</span></code>.</li>
+<li><strong>x</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – X position in the Xpresso windows.</li>
+<li><strong>y</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – Y position in the Xpresso windows.</li>
+<li><strong>NodeBefore</strong> (<a class="reference internal" href="Node.html#RedshiftWrapper.Node.Node" title="RedshiftWrapper.Node.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a> or c4d.modules.graphview.GvNode) – The node to insert before (Change execution order !!)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">All Nodes inside the material</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">List of <a class="reference internal" href="Node.html#RedshiftWrapper.Node.Node" title="RedshiftWrapper.Node.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Redshift.Redshift.GetAllNodes">
+<code class="descname">GetAllNodes</code><span class="sig-paren">(</span><em>removeMasterGroup=True</em>, <em>gvNode=None</em>, <em>nodeList=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift.GetAllNodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift.GetAllNodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all nodes inside the material. 
+Use redshift.GatAllNodes(), only removeMasterGroup is needed other parameters are for internal use.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>removeMasterGroup</strong> (<em>Bool.</em>) – True to remove the Shader Group that hold all other Node otherwise false.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">All Nodes inside the material.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">List of <a class="reference internal" href="Node.html#RedshiftWrapper.Node.Node" title="RedshiftWrapper.Node.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Redshift.Redshift.RemoveConnection">
+<code class="descname">RemoveConnection</code><span class="sig-paren">(</span><em>port</em>, <em>node=None</em>, <em>portType=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift.RemoveConnection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift.RemoveConnection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnect all connection from a given port of Nodes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>port</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/2/library/functions.html#str" title="(in Python v2.7)"><em>str</em></a><em> or </em><em>c4d.modules.graphview.GvPort</em>) – Id of the GvPort (not the ID of the parameter), Name of the GvPort or The GvPort of the Node returned by Node.ExposeParameter or Node.SearchPort</li>
+<li><strong>node</strong> (<a class="reference internal" href="Node.html#RedshiftWrapper.Node.Node" title="RedshiftWrapper.Node.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a>) – The Node that host the GvPort who want to remove connection PARAMETER WILL BE IGNORED IF GvPORT IS USED IN port !!!</li>
+<li><strong>portType</strong> (<a class="reference external" href="https://docs.python.org/2/library/functions.html#int" title="(in Python v2.7)"><em>int</em></a>) – GV_PORT_INPUT or GV_PORT_OUTPUT PARAMETER WILL BE IGNORED IF GvPORT IS USED IN port !!!</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">True if connection is created overthiwe False</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Redshift.Redshift.RemoveShader">
+<code class="descname">RemoveShader</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift.RemoveShader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift.RemoveShader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a shader inside the material.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>node</strong> (<a class="reference internal" href="Node.html#RedshiftWrapper.Node.Node" title="RedshiftWrapper.Node.Node"><code class="xref py py-class docutils literal"><span class="pre">Node</span></code></a>) – Tee node object to remove.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if delete overthiwe False.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="RedshiftWrapper.Redshift.Redshift.SetMat">
+<code class="descname">SetMat</code><span class="sig-paren">(</span><em>mat</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/RedshiftWrapper/Redshift.html#Redshift.SetMat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#RedshiftWrapper.Redshift.Redshift.SetMat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the mat to act on.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mat</strong> (<em>c4d.BaseMaterial.</em>) – The material to act on. Only accept a Redshift Material.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">TypeError</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Adam Maxime <Graphos>.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/Redshift.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,306 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>RedshiftWrapper.MetaName &#8212; C4D_RedshiftWrapper_API 1 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for RedshiftWrapper.MetaName</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">c4d</span>
+
+<div class="viewcode-block" id="MetaMat"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaMat">[docs]</a><span class="k">class</span> <span class="nc">MetaMat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>
+
+    <span class="c1"># Materials</span>
+    <span class="n">MatArchi</span> <span class="o">=</span> <span class="s2">&quot;Architectural&quot;</span>
+    <span class="n">MarCar</span> <span class="o">=</span> <span class="s2">&quot;CarPaint&quot;</span>
+    <span class="n">MatHair</span> <span class="o">=</span> <span class="s2">&quot;Hair&quot;</span>
+    <span class="n">MatIncande</span> <span class="o">=</span> <span class="s2">&quot;Incandescent&quot;</span>
+    <span class="n">MatDefault</span> <span class="o">=</span> <span class="s2">&quot;Material&quot;</span>
+    <span class="n">MatBlender</span> <span class="o">=</span> <span class="s2">&quot;MaterialBlender&quot;</span>
+    <span class="n">MatShadow</span> <span class="o">=</span> <span class="s2">&quot;MatteShadow&quot;</span>
+    <span class="n">MatSkin</span> <span class="o">=</span> <span class="s2">&quot;Skin&quot;</span>
+    <span class="n">MatSprite</span> <span class="o">=</span> <span class="s2">&quot;Sprite&quot;</span>
+    <span class="n">MatSSS</span> <span class="o">=</span> <span class="s2">&quot;SubSurfaceScatter&quot;</span></div>
+  
+<div class="viewcode-block" id="MetaTex"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaTex">[docs]</a><span class="k">class</span> <span class="nc">MetaTex</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.635</span><span class="p">,</span> <span class="mf">0.008</span><span class="p">)</span>
+
+    <span class="c1"># Textures</span>
+    <span class="n">TexAO</span> <span class="o">=</span> <span class="s2">&quot;AmbientOcclusion&quot;</span>
+    <span class="n">TexCamMap</span> <span class="o">=</span> <span class="s2">&quot;CameraMap&quot;</span>
+    <span class="n">TexCurvature</span> <span class="o">=</span> <span class="s2">&quot;Curvature&quot;</span>
+    <span class="n">TexNoise</span> <span class="o">=</span> <span class="s2">&quot;RSNoise&quot;</span>
+    <span class="n">TexRamp</span> <span class="o">=</span> <span class="s2">&quot;RSRamp&quot;</span>
+    <span class="n">TexSampler</span> <span class="o">=</span> <span class="s2">&quot;TextureSampler&quot;</span>
+    <span class="n">TexWire</span> <span class="o">=</span> <span class="s2">&quot;WireFrame&quot;</span></div>
+  
+<div class="viewcode-block" id="MetaUtils"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaUtils">[docs]</a><span class="k">class</span> <span class="nc">MetaUtils</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.349</span><span class="p">,</span> <span class="mf">0.514</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># utility</span>
+    <span class="n">UtBumpBlend</span> <span class="o">=</span> <span class="s2">&quot;BumpBlender&quot;</span>
+    <span class="n">UtBump</span> <span class="o">=</span> <span class="s2">&quot;BumpMap&quot;</span>
+    <span class="n">UtHairAttr</span> <span class="o">=</span> <span class="s2">&quot;C4DHairAttribute&quot;</span>
+    <span class="n">UtBaker</span> <span class="o">=</span> <span class="s2">&quot;C4DBaker&quot;</span>
+    <span class="n">UtUDColor</span> <span class="o">=</span> <span class="s2">&quot;RSUserDataColor&quot;</span>
+    <span class="n">UtConstant</span> <span class="o">=</span> <span class="s2">&quot;400001120&quot;</span>
+    <span class="n">UtDisplace</span> <span class="o">=</span> <span class="s2">&quot;Displacement&quot;</span>
+    <span class="n">UtDisplaceBlend</span> <span class="o">=</span> <span class="s2">&quot;DisplacementBlender&quot;</span>
+    <span class="n">UtFresnel</span> <span class="o">=</span> <span class="s2">&quot;Fresnel&quot;</span>
+    <span class="n">UtHairPos</span> <span class="o">=</span> <span class="s2">&quot;RSHairPosition&quot;</span>
+    <span class="n">UtHairRandom</span> <span class="o">=</span> <span class="s2">&quot;HairRandomColor&quot;</span>
+    <span class="n">UtUDInt</span> <span class="o">=</span> <span class="s2">&quot;RSUserDataInteger&quot;</span>
+    <span class="n">UtNormap</span> <span class="o">=</span> <span class="s2">&quot;NormalMap&quot;</span>
+    <span class="n">UtParticleAttr</span> <span class="o">=</span> <span class="s2">&quot;ParticleAttributeLookup&quot;</span>
+    <span class="n">UtRaySwitch</span> <span class="o">=</span> <span class="s2">&quot;RaySwitch&quot;</span>
+    <span class="n">UtRoundCorners</span> <span class="o">=</span> <span class="s2">&quot;RoundCorners&quot;</span>
+    <span class="n">UtUDScalar</span> <span class="o">=</span> <span class="s2">&quot;RSUserDataScalar&quot;</span>
+    <span class="n">UtShaderSwitch</span> <span class="o">=</span> <span class="s2">&quot;RSShaderSwitch&quot;</span>
+    <span class="n">UtState</span> <span class="o">=</span> <span class="s2">&quot;State&quot;</span>
+    <span class="n">UtTriPlanar</span> <span class="o">=</span> <span class="s2">&quot;TriPlanar&quot;</span>
+    <span class="n">UtUDVector</span> <span class="o">=</span> <span class="s2">&quot;RSUserDataVector&quot;</span>
+    <span class="n">UtVertexAttr</span> <span class="o">=</span> <span class="s2">&quot;VertexAttributeLookup&quot;</span></div>
+    
+<div class="viewcode-block" id="MetaEnv"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaEnv">[docs]</a><span class="k">class</span> <span class="nc">MetaEnv</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.537</span><span class="p">,</span> <span class="mf">0.443</span><span class="p">,</span> <span class="mf">0.984</span><span class="p">)</span>
+
+    <span class="c1"># Environment</span>
+    <span class="n">Env</span> <span class="o">=</span> <span class="s2">&quot;Environment&quot;</span>
+    <span class="n">EnvSky</span> <span class="o">=</span> <span class="s2">&quot;PhysicalSky&quot;</span></div>
+
+<div class="viewcode-block" id="MetaLight"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaLight">[docs]</a><span class="k">class</span> <span class="nc">MetaLight</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+
+    <span class="c1"># Light</span>
+    <span class="n">LightDome</span> <span class="o">=</span> <span class="s2">&quot;Light_Dome&quot;</span>
+    <span class="n">LightIes</span> <span class="o">=</span> <span class="s2">&quot;Light_IES&quot;</span>
+    <span class="n">Light</span> <span class="o">=</span> <span class="s2">&quot;Light&quot;</span>
+    <span class="n">LightPortal</span> <span class="o">=</span> <span class="s2">&quot;Light_Portal&quot;</span>
+    <span class="n">LightSun</span> <span class="o">=</span> <span class="s2">&quot;PhysicalSun&quot;</span></div>
+    
+<div class="viewcode-block" id="MetaVolume"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaVolume">[docs]</a><span class="k">class</span> <span class="nc">MetaVolume</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.361</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+
+    <span class="c1"># Volume</span>
+    <span class="n">Volume</span> <span class="o">=</span> <span class="s2">&quot;Volume&quot;</span></div>
+    
+<div class="viewcode-block" id="MetaMath"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaMath">[docs]</a><span class="k">class</span> <span class="nc">MetaMath</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.333</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.635</span><span class="p">)</span>
+
+    <span class="c1">#Math</span>
+    <span class="n">MathAbs</span> <span class="o">=</span> <span class="s2">&quot;RSMathAbs&quot;</span>
+    <span class="n">MathAdd</span> <span class="o">=</span> <span class="s2">&quot;RSMathAdd&quot;</span>
+    <span class="n">MathACos</span> <span class="o">=</span> <span class="s2">&quot;RSMathACos&quot;</span>
+    <span class="n">MathASin</span> <span class="o">=</span> <span class="s2">&quot;RSMathASin&quot;</span>
+    <span class="n">MathATan2</span> <span class="o">=</span> <span class="s2">&quot;RSMathATan2&quot;</span>
+    <span class="n">MathATan</span> <span class="o">=</span> <span class="s2">&quot;RSMathATan&quot;</span>
+    <span class="n">MathBias</span> <span class="o">=</span> <span class="s2">&quot;RSMathBias&quot;</span>
+    <span class="n">MathRange</span> <span class="o">=</span> <span class="s2">&quot;RSMathRange&quot;</span>
+    <span class="n">MathCos</span> <span class="o">=</span> <span class="s2">&quot;RSMathCos&quot;</span>
+    <span class="n">MathCrossVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathCrossVector&quot;</span>
+    <span class="n">MathDiv</span> <span class="o">=</span> <span class="s2">&quot;RSMathDiv&quot;</span>
+    <span class="n">MathDotVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathDotVector&quot;</span>
+    <span class="n">MathExp</span> <span class="o">=</span> <span class="s2">&quot;RSMathExp&quot;</span>
+    <span class="n">MathFloor</span> <span class="o">=</span> <span class="s2">&quot;RSMathFloor&quot;</span>
+    <span class="n">MathFrac</span> <span class="o">=</span> <span class="s2">&quot;RSMathFrac&quot;</span>
+    <span class="n">MathGain</span> <span class="o">=</span> <span class="s2">&quot;RSMathGain&quot;</span>
+    <span class="n">MathInv</span> <span class="o">=</span> <span class="s2">&quot;RSMathInv&quot;</span>
+    <span class="n">MathLn</span> <span class="o">=</span> <span class="s2">&quot;RSMathLn&quot;</span>
+    <span class="n">MathLog</span> <span class="o">=</span> <span class="s2">&quot;RSMathLog&quot;</span>
+    <span class="n">MathMax</span> <span class="o">=</span> <span class="s2">&quot;RSMathMax&quot;</span>
+    <span class="n">MathMin</span> <span class="o">=</span> <span class="s2">&quot;RSMathMin&quot;</span>
+    <span class="n">MathMix</span> <span class="o">=</span> <span class="s2">&quot;RSMathMix&quot;</span>
+    <span class="n">MathMod</span> <span class="o">=</span> <span class="s2">&quot;RSMathMod&quot;</span>
+    <span class="n">MathMul</span> <span class="o">=</span> <span class="s2">&quot;RSMathMul&quot;</span>
+    <span class="n">MathNeg</span> <span class="o">=</span> <span class="s2">&quot;RSMathNeg&quot;</span>
+    <span class="n">MathNormalizeVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathNormalizeVector&quot;</span>
+    <span class="n">MathPow</span> <span class="o">=</span> <span class="s2">&quot;RSMathPow&quot;</span>
+    <span class="n">MathRcp</span> <span class="o">=</span> <span class="s2">&quot;RSMathRcp&quot;</span>
+    <span class="n">MathSaturate</span> <span class="o">=</span> <span class="s2">&quot;RSMathSaturate&quot;</span>
+    <span class="n">MathSign</span> <span class="o">=</span> <span class="s2">&quot;RSMathSign&quot;</span>
+    <span class="n">MathSin</span> <span class="o">=</span> <span class="s2">&quot;RSMathSin&quot;</span>
+    <span class="n">MathSqrt</span> <span class="o">=</span> <span class="s2">&quot;RSMathSqrt&quot;</span>
+    <span class="n">MathSub</span> <span class="o">=</span> <span class="s2">&quot;RSMathSub&quot;</span>
+    <span class="n">MathTan</span> <span class="o">=</span> <span class="s2">&quot;RSMathTan&quot;</span>
+    <span class="n">MathAbsVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathAbsVector&quot;</span>
+    <span class="n">MathAddVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathAddVector&quot;</span>
+    <span class="n">MathBiasVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathBiasVector&quot;</span>
+    <span class="n">MathRangeVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathRangeVector&quot;</span>
+    <span class="n">MathDivVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathDivVector&quot;</span>
+    <span class="n">MathExpVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathExpVector&quot;</span>
+    <span class="n">MathFloorVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathFloorVector&quot;</span>
+    <span class="n">MathFracVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathFracVector&quot;</span>
+    <span class="n">MathGainVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathGainVector&quot;</span>
+    <span class="n">MathInvVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathInvVector&quot;</span>
+    <span class="n">MathLengthVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathLengthVector&quot;</span>
+    <span class="n">MathLnVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathLnVector&quot;</span>
+    <span class="n">MathLogVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathLogVector&quot;</span>
+    <span class="n">MathMaxVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathMaxVector&quot;</span>
+    <span class="n">MathMinVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathMinVector&quot;</span>
+    <span class="n">MathMixVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathMixVector&quot;</span>
+    <span class="n">MathModVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathModVector&quot;</span>
+    <span class="n">MathMulVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathMulVector&quot;</span>
+    <span class="n">MathNegVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathNegVector&quot;</span>
+    <span class="n">MathPowVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathPowVector&quot;</span>
+    <span class="n">MathRcpVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathRcpVector&quot;</span>
+    <span class="n">MathSaturateVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathSaturateVector&quot;</span>
+    <span class="n">MathSignVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathSignVector&quot;</span>
+    <span class="n">MathSqrtVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathSqrtVector&quot;</span>
+    <span class="n">MathSubVector</span> <span class="o">=</span> <span class="s2">&quot;RSMathSubVector&quot;</span>
+    <span class="n">MathRSVectorToScalars</span> <span class="o">=</span> <span class="s2">&quot;RSVectorToScalars&quot;</span></div>
+    
+<div class="viewcode-block" id="MetaColor"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaColor">[docs]</a><span class="k">class</span> <span class="nc">MetaColor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.094</span><span class="p">,</span> <span class="mf">0.776</span><span class="p">,</span> <span class="mf">0.278</span><span class="p">)</span>
+
+    <span class="c1"># Color</span>
+    <span class="n">ColorAbsColor</span> <span class="o">=</span> <span class="s2">&quot;RSMathAbsColor&quot;</span>
+    <span class="n">ColorRange</span> <span class="o">=</span> <span class="s2">&quot;RSColorRange&quot;</span>
+    <span class="n">ColorComposite</span> <span class="o">=</span> <span class="s2">&quot;RSColorComposite&quot;</span>
+    <span class="n">ColorCorrection</span> <span class="o">=</span> <span class="s2">&quot;RSColorCorrection&quot;</span>
+    <span class="n">ColorExpColor</span> <span class="o">=</span> <span class="s2">&quot;RSMathExpColor&quot;</span>
+    <span class="n">ColorGainColor</span> <span class="o">=</span> <span class="s2">&quot;RSMathGainColor&quot;</span>
+    <span class="n">ColorInvColor</span> <span class="o">=</span> <span class="s2">&quot;RSMathInvColor&quot;</span>
+    <span class="n">ColorLayer</span> <span class="o">=</span> <span class="s2">&quot;RSColorLayer&quot;</span>
+    <span class="n">ColorMaker</span> <span class="o">=</span> <span class="s2">&quot;RSColorMaker&quot;</span>
+    <span class="n">ColorMix</span> <span class="o">=</span> <span class="s2">&quot;RSColorMix&quot;</span>
+    <span class="n">ColorSaturateColor</span> <span class="o">=</span> <span class="s2">&quot;RSMathSaturateColor&quot;</span>
+    <span class="n">ColorSplitter</span> <span class="o">=</span> <span class="s2">&quot;RSColorSplitter&quot;</span>
+    <span class="n">ColorSubColor</span> <span class="o">=</span> <span class="s2">&quot;RSMathSubColor&quot;</span>
+    <span class="n">Color2HSV</span> <span class="o">=</span> <span class="s2">&quot;RSColor2HSV&quot;</span>
+    <span class="n">ColorRSHSV2Color</span> <span class="o">=</span> <span class="s2">&quot;RSHSV2Color&quot;</span>
+    <span class="n">ColorBiasColor</span> <span class="o">=</span> <span class="s2">&quot;RSMathBiasColor&quot;</span></div>
+   
+<div class="viewcode-block" id="MetaOut"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaOut">[docs]</a><span class="k">class</span> <span class="nc">MetaOut</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">NodeColor</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.204</span><span class="p">,</span> <span class="mf">0.443</span><span class="p">,</span> <span class="mf">0.682</span><span class="p">)</span>
+
+    <span class="c1"># Output</span>
+    <span class="n">Output</span> <span class="o">=</span> <span class="s2">&quot;Output&quot;</span></div>
+    
+<div class="viewcode-block" id="MetaName"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaName">[docs]</a><span class="k">class</span> <span class="nc">MetaName</span><span class="p">(</span><span class="n">MetaMat</span><span class="p">,</span> <span class="n">MetaTex</span><span class="p">,</span> <span class="n">MetaUtils</span><span class="p">,</span> <span class="n">MetaEnv</span><span class="p">,</span> <span class="n">MetaLight</span><span class="p">,</span> <span class="n">MetaVolume</span><span class="p">,</span> <span class="n">MetaMath</span><span class="p">,</span> <span class="n">MetaColor</span><span class="p">,</span> <span class="n">MetaOut</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class for storing all possibles metaname.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_TestProperty</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valueToTest</span><span class="p">,</span> <span class="n">classToTest</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test if any properties of :class:`MetaclassName` have a specific value, This fonction is used to test if a string is under MetaName.</span>
+
+<span class="sd">        :param valueToTest: value to test if it&#39;s inside MetaName.</span>
+<span class="sd">        :type valueToTest: str</span>
+<span class="sd">        :param classToTest: class to test if valueToTest is within.</span>
+<span class="sd">        :type classToTest: class</span>
+<span class="sd">        :return: True if it&#39;s on MetaName overtwise False.</span>
+<span class="sd">        :rtype: Bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">classToTest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">MetaName</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">classToTest</span>
+        <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="n">attr</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="n">valueToTest</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+    
+<div class="viewcode-block" id="MetaName.GetDefaultColorNode"><a class="viewcode-back" href="../../MetaName.html#RedshiftWrapper.MetaName.MetaName.GetDefaultColorNode">[docs]</a>    <span class="k">def</span> <span class="nf">GetDefaultColorNode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodeType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the Default color for a node given it&#39;s type.</span>
+
+<span class="sd">        :param nodeType: The MetaName type to test.</span>
+<span class="sd">        :type nodeType: str</span>
+<span class="sd">        :return: Default color.</span>
+<span class="sd">        :rtype: c4d.Vector</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">classToTest</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaMat</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaTex</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaUtils</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaEnv</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaLight</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaVolume</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaMath</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaColor</span><span class="p">())</span>
+        <span class="n">classToTest</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MetaOut</span><span class="p">())</span>
+        
+        <span class="n">color</span> <span class="o">=</span> <span class="n">c4d</span><span class="o">.</span><span class="n">Vector</span><span class="p">(</span><span class="mf">0.38</span><span class="p">,</span> <span class="mf">0.384</span><span class="p">,</span> <span class="mf">0.392</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">classToTest</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_TestProperty</span><span class="p">(</span><span class="n">nodeType</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">NodeColor</span>
+        <span class="k">return</span> <span class="n">color</span></div></div>
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Adam Maxime <Graphos>.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
