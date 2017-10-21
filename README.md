@@ -2,6 +2,7 @@
 Wrapper class for the current API of Redshift for c4d<br />
 More detailled documentation [Here](https://gr4ph0s.github.io/C4D_RedshiftWrapper_API/)<br />
 Download a minified version here https://gist.github.com/gr4ph0s/cdbcf67a05ee6ad8d365220435ae1f93#file-a-minified-version-of-my-module-c4d_redshiftwrapper_api
+Example for use minified version https://pastebin.com/BRggfGdA
 
 ## Class Presentation
 
