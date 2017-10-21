@@ -9,6 +9,7 @@ Example for use minified version https://pastebin.com/BRggfGdA
 ### Redshift
 **Redshift class is the main wrapper. Use it for any interaction of the GraphView.
 - set_mat, **Make sure to call it before any others one.** Set on which material change are done.
+- IsRedshiftMaterial, check if material is a redshift material.
 - CreateMaterial, create a redshift material.
 - GetAllNodes, return list of all Node in the material.
 - CreateShader, create a shader inside the material.

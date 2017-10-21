@@ -251,6 +251,17 @@ class Redshift(MetaName):
             return None
 
         return mat
+
+    def IsRedshiftMaterial(self, mat):
+        global redshift
+        if self._mat is None:
+            return False
+        if not isinstance(self._mat, c4d.BaseMaterial):
+            return False
+        if not self._mat.IsInstanceOf(redshift.Mrsmaterial):
+            return False
+
+        return True
         
     def RemoveConnection(self, port, node=None, portType=None):
         """Disconnect all connection from a given port of Nodes.
