@@ -1,9 +1,14 @@
 import c4d
-import redshift
+try:
+    import redshift
+except:
+    pass
 from MetaName import MetaName
+from ImportTester import ImportTester
 
 
 class Node(MetaName):
+    __metaclass__ = ImportTester
     """Represent a Node that already exist in a Material.
 
     :member _GvNode: (c4d.modules.graphview.GvNode) - The GvNode linked to this Node. READ-ONLY DO NOT EDIT !!! 

@@ -2,8 +2,12 @@
 #                   Import
 # ==============================================
 import c4d
-import redshift
+try:
+    import redshift
+except:
+    pass
 
+from ImportTester import ImportTester
 from Node import Node
 from MetaName import MetaName
 
@@ -13,10 +17,11 @@ from MetaName import MetaName
 
 __author__ = 'Adam Maxime - Graphos <gr4ph0s(at)hotmail.fr>'
 __project__ = "https://github.com/gr4ph0s/C4D_RedshiftWrapper_API"
-__version__ = '1.0'
+__version__ = '1.1'
 
 
 class Redshift(MetaName):
+    __metaclass__ = ImportTester
     """The main wrapper arround Redshift API.
 
         :member doUndo: (Bool) True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False.
@@ -27,6 +32,10 @@ class Redshift(MetaName):
     doUndo = True
     _mat = None
     _gvMaster = None
+
+    @staticmethod
+    def RedhisftIsInstalled():
+        return ImportTester._CheckImport("redshift")
 
     def SetMat(self, mat):
         """Set the mat to act on.

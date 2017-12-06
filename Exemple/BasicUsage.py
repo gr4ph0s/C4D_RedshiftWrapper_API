@@ -3,6 +3,8 @@ from RedshiftWrapper.Redshift import Redshift
 
 def main():
     rs = Redshift()
+    if rs is False:
+        return
 
     #Assign Material
     rs.SetMat(doc.GetFirstMaterial())
