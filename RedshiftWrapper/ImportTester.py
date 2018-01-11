@@ -31,6 +31,7 @@ class ImportTester(type):
     def __call__(cls, *args, **kwargs):
         if not cls._HaveBeenCalled:
             cls._CheckImport("redshift")
+            cls._HaveBeenCalled = True
            
         if cls._CanImport:
             return super(ImportTester, cls).__call__(*args, **kwargs)
