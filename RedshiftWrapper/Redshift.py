@@ -254,7 +254,8 @@ class Redshift(MetaName):
         if MatType < 1000 or MatType > 1010:
             raise ValueError('Invalid value for matType, must be from 1000 to 1010')
 
-        c4d.CallCommand(1036759, MatType) 
+        c4d.CallCommand(1036759, MatType)
+        doc = c4d.documents.GetActiveDocument()
         mat = doc.GetFirstMaterial()
         if not mat:
             return None
