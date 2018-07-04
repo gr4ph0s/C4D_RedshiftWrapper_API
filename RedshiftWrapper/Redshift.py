@@ -240,22 +240,28 @@ class Redshift(MetaName):
             self._gvMaster.AddUndo()
         return gvPortSrc.Connect(gvPortDest)
         
-    def CreateMaterial(self, MatType=1000):
+    def CreateMaterial(self, MatType=1000, doc=None):
         """Create a new redshift material.
 
         :param MatType: The type of the Redshift shader (from 1001, Material to 1010 Volume)
         :type MatType: int
+        :type doc: c4d.BaseDocument the document to insert material
         :return: Created material or None if it's fail
         :rtype: c4d.Material or None.
         """
         if not isinstance(MatType, int):
-            raise TypeError('MatType is not an integer')
+            raise TypeError('MatType is not an Integer')
+
+        if not isinstance(doc, c4d.BaseDocument) and is not None:
+            raise TypeError('doc is not a BaseDocument')
+
+        if doc is None:
+        		doc = doc = c4d.documents.GetActiveDocument()
 
         if MatType < 1000 or MatType > 1010:
             raise ValueError('Invalid value for matType, must be from 1000 to 1010')
 
         c4d.CallCommand(1036759, MatType)
-        doc = c4d.documents.GetActiveDocument()
         mat = doc.GetFirstMaterial()
         if not mat:
             return None
