@@ -252,7 +252,7 @@ class Redshift(MetaName):
         if not isinstance(MatType, int):
             raise TypeError('MatType is not an Integer')
 
-        if not isinstance(doc, c4d.BaseDocument) and is not None:
+        if not isinstance(doc, c4d.BaseDocument) and doc is not None:
             raise TypeError('doc is not a BaseDocument')
 
         if doc is None:
