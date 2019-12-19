@@ -180,7 +180,7 @@ class Redshift(MetaName):
 
         if self.doUndo:
             self._gvMaster.AddUndo()
-        return node.GetNode().Delete()
+        return node.GetNode().Remove()
 
     def CreateConnection(self, SrcNode, DestNode, SrcParameter=None, DestParameter=None):
         """Connect two Nodes together.
