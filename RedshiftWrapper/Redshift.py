@@ -4,6 +4,7 @@
 import os
 import sys
 import c4d
+
 try:
     import redshift
 except:
@@ -25,8 +26,7 @@ __project__ = "https://github.com/gr4ph0s/C4D_RedshiftWrapper_API"
 __version__ = '1.1'
 
 
-class Redshift(MetaName):
-    __metaclass__ = ImportTester
+class Redshift(MetaName, metaclass=ImportTester):
     """The main wrapper arround Redshift API.
 
         :member doUndo: (Bool) True if the wrapper have to call GvMaster.AddUndo() before any change otherwise False.
@@ -120,7 +120,8 @@ class Redshift(MetaName):
         if not isinstance(y, int):
             raise TypeError('y is not valid type')
 
-        if not isinstance(NodeBefore, Node) and not isinstance(NodeBefore, c4d.modules.graphview.GvNode) and NodeBefore is not None:
+        if not isinstance(NodeBefore, Node) and not isinstance(NodeBefore,
+                                                               c4d.modules.graphview.GvNode) and NodeBefore is not None:
             raise TypeError('NodeBefore is not valid type')
 
         # Create redshift node
@@ -164,7 +165,7 @@ class Redshift(MetaName):
         else:
             if self.doUndo:
                 self._gvMaster.AddUndo()
-            
+
             return Node(self._gvMaster.CreateNode(self._gvMaster.GetRoot(), shaderType, NodeBefore, x, y), self.doUndo)
 
         return None
@@ -244,7 +245,7 @@ class Redshift(MetaName):
         if self.doUndo:
             self._gvMaster.AddUndo()
         return gvPortSrc.Connect(gvPortDest)
-        
+
     def CreateMaterial(self, MatType=1000, doc=None):
         """Create a new redshift material.
 
@@ -257,11 +258,11 @@ class Redshift(MetaName):
         if not isinstance(MatType, int):
             raise TypeError('MatType is not an Integer')
 
-        if not isinstance(doc, c4d.BaseDocument) or doc is not None:
+        if not isinstance(doc, c4d.BaseDocument) and doc is not None:
             raise TypeError('doc is not a BaseDocument')
 
         if doc is None:
-        		doc = c4d.documents.GetActiveDocument()
+            doc = c4d.documents.GetActiveDocument()
 
         if MatType < 1000 or MatType > 1010:
             raise ValueError('Invalid value for matType, must be from 1000 to 1010')
@@ -283,7 +284,7 @@ class Redshift(MetaName):
             return False
 
         return True
-        
+
     def RemoveConnection(self, port, node=None, portType=None):
         """Disconnect all connection from a given port of Nodes.
 
@@ -303,19 +304,20 @@ class Redshift(MetaName):
             if not isinstance(node, Node):
                 raise TypeError('node is not valid Node Object')
 
-        if not isinstance(port, int) and not isinstance(port, str) and not isinstance(port, c4d.modules.graphview.GvPort):
+        if not isinstance(port, int) and not isinstance(port, str) and not isinstance(port,
+                                                                                      c4d.modules.graphview.GvPort):
             raise TypeError('port is not parameter or not name of a parameter')
 
         # Get the GvPort
         gvPort = None
-        if  isinstance(port, c4d.modules.graphview.GvPort):
+        if isinstance(port, c4d.modules.graphview.GvPort):
             gvPort = port
-        else :
+        else:
             gvPort = node.SearchPort(port, portType)
 
-        #Undo if needed
+        # Undo if needed
         if self.doUndo:
             self._gvMaster.AddUndo()
 
-        #Remove connection
+        # Remove connection
         return gvPort.Remove()
