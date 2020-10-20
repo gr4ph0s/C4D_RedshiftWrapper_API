@@ -87,6 +87,8 @@ if __name__=='__main__':
 ### Installation
 
 To use it as a library simply copy RedshiftWrapper folder into
+
+Before R23
 - Windows
 ```
 %AppData%\MAXON\CINEMA 4D RXX\library\python\packages\win64
@@ -96,9 +98,19 @@ To use it as a library simply copy RedshiftWrapper folder into
 /Users/"YOURUSERNAME"/Library/Preferences/MAXON/CINEMA 4D RXX/library/python/packages/win64
 ```
 
+R23 and more
+- Windows
+```
+%AppData%\MAXON\CINEMA 4D RXX\python37\libs
+```
+- Mac
+```
+/Users/"YOURUSERNAME"/Library/Preferences/MAXON/CINEMA 4D RXX/python37/libs
+```
+
 Even if I suggest to use it as a library you are free to only include it into your project. For doing it in proper way I suggest you to read [Best Practice For Imports from official support forum](http://www.plugincafe.com/forum/forum_posts.asp?TID=10727)
 and then use [py-localimport](https://gist.github.com/NiklasRosenstein/f5690d8f36bbdc8e5556) from [Niklas Rosenstein](https://github.com/NiklasRosenstein)
 
 ### Compatibility
-Tested and build on Redshift 2.5.32 and R17/R18/R19
+Tested and build on Redshift 2.5.32 and R17/R18/R19/23
 
