@@ -1,8 +1,14 @@
+import os
+import sys
 import c4d
 try:
     import redshift
 except:
     pass
+
+if os.path.dirname(__file__) not in sys.path:
+    sys.path.append(os.path.dirname(__file__))
+
 from MetaName import MetaName
 from ImportTester import ImportTester
 

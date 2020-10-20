@@ -24,7 +24,7 @@ class ImportTester(type):
                 return True
            
             except ImportError:
-                print __import__(clsName)
+                print(__import__(clsName))
                 cls._CanImport = False
                 return False
  
