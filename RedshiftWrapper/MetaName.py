@@ -5,7 +5,7 @@ class MetaMat(object):
 
     # Materials
     MatArchi = "Architectural"
-    MarCar = "CarPaint"
+    MatCar = "CarPaint"
     MatHair = "Hair"
     MatIncande = "Incandescent"
     MatDefault = "Material"
@@ -174,7 +174,7 @@ class MetaName(MetaMat, MetaTex, MetaUtils, MetaEnv, MetaLight, MetaVolume, Meta
     """
 
     def _TestProperty(self, valueToTest, classToTest=None):
-        """Test if any properties of :class:`MetaclassName` have a specific value, This fonction is used to test if a string is under MetaName.
+        """Test if any properties of :class:`MetaclassName` have a specific value, This function is used to test if a string is under MetaName.
 
         :param valueToTest: value to test if it's inside MetaName.
         :type valueToTest: str
