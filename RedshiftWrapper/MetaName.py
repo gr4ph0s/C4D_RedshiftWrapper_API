@@ -169,6 +169,7 @@ class MetaOut(object):
     # Output
     Output = "Output"
     
+ 
 class MetaName(MetaMat, MetaTex, MetaUtils, MetaEnv, MetaLight, MetaVolume, MetaMath, MetaColor, MetaOut):
     """Class for storing all possibles metaname.
     """
